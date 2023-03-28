@@ -27,7 +27,7 @@ export const PromptFolders: FC<Props> = ({
   // Create and include the default folder if it doesn't exist
   const defaultFolder: Folder = {
     id: 'product',
-    name: 'Products',
+    name: 'Product',
     type: 'prompt',
   };
   const adjustedFolders = folders.some((folder) => folder.id === defaultFolder.id)
