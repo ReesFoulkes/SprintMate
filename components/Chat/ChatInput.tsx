@@ -308,7 +308,7 @@ export const ChatInput: FC<Props> = ({
       </div>
       <div className="px-3 pt-2 pb-3 text-center text-[12px] text-black/50 dark:text-white/50 md:px-4 md:pt-3 md:pb-6">
         <a
-          href="https://github.com/mckaywrigley/chatbot-ui"
+          href="https://openai.com/blog/chatgpt"
           target="_blank"
           rel="noreferrer"
           className="underline"
@@ -317,7 +317,7 @@ export const ChatInput: FC<Props> = ({
         </a>
         .{' '}
         {t(
-          "Chatbot UI is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
+          "SprintMate is a tool for Development individuals to optimise their workflow, using the ChatGPT model.",
         )}
       </div>
     </div>
