@@ -112,7 +112,7 @@ useEffect(() => {
       {
         id: 'p2',
         name: 'Competitor Analysis',
-        content: 'Provide a list of <company name> competitors and do a SWOT analysis of each',
+        content: 'Provide a list of <company name> competitors and do a SWOT analysis of each. with the amount they have raised to date',
         description: '',
         folderId: 'product',
         model: defaultModel,
