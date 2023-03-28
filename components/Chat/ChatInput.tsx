@@ -313,7 +313,7 @@ export const ChatInput: FC<Props> = ({
           rel="noreferrer"
           className="underline"
         >
-          ChatBot UI
+          SprintMate
         </a>
         .{' '}
         {t(
