@@ -78,7 +78,7 @@ export const ChatInput: FC<Props> = ({
     }
 
     if (!content) {
-      alert(t('Please enter a message'));
+      alert(t('Please enter a message for SprintMate'));
       return;
     }
 
