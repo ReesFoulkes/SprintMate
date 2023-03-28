@@ -12,6 +12,7 @@ import { PromptFolders } from '../Folders/Prompt/PromptFolders';
 import { Search } from '../Sidebar/Search';
 import { PromptbarSettings } from './PromptbarSettings';
 import { Prompts } from './Prompts';
+import { OpenAIModels } from '@/types/openai';
 
 interface Props {
   prompts: Prompt[];
@@ -77,24 +78,65 @@ export const Promptbar: FC<Props> = ({
     e.target.style.background = 'none';
   };
 
-  useEffect(() => {
-    if (searchTerm) {
-      setFilteredPrompts(
-        prompts.filter((prompt) => {
-          const searchable =
-            prompt.name.toLowerCase() +
-            ' ' +
-            prompt.description.toLowerCase() +
-            ' ' +
-            prompt.content.toLowerCase();
-          return searchable.includes(searchTerm.toLowerCase());
-        }),
-      );
-    } else {
-      setFilteredPrompts(prompts);
-    }
-  }, [searchTerm, prompts]);
+useEffect(() => {
+  const defaultPrompts = createDefaultPrompts();
+  if (searchTerm) {
+    const searchResults = prompts.filter((prompt) => {
+      const searchable =
+        prompt.name.toLowerCase() +
+        ' ' +
+        prompt.description.toLowerCase() +
+        ' ' +
+        prompt.content.toLowerCase();
+      return searchable.includes(searchTerm.toLowerCase());
+    });
+    setFilteredPrompts([...searchResults, ...defaultPrompts]);
+  } else {
+    setFilteredPrompts([...prompts, ...defaultPrompts]);
+  }
+}, [searchTerm, prompts]);
 
+
+  const createDefaultPrompts = () => {
+    const defaultModel = OpenAIModels['gpt-3.5-turbo'];
+  
+    const defaultPrompts = [
+      {
+        id: 'p1',
+        name: 'Stories',
+        content: 'Write a user story including acceptance criteria, flow, analytics to track, definition of done, metrics to define success, using best modern practice, for {feature}.',
+        description: '',
+        folderId: 'product',
+        model: defaultModel,
+      },
+      {
+        id: 'p2',
+        name: 'Competitor Analysis',
+        content: 'Provide a list of <company name> competitors and do a SWOT analysis of each',
+        description: '',
+        folderId: 'product',
+        model: defaultModel,
+      },
+      {
+        id: 'p3',
+        name: 'Market Size',
+        content: 'Who would use this and how big is the market? <describe your product idea>. Include references to sources of statistics or data.',
+        description: '',
+        folderId: 'product',
+        model: defaultModel,
+      },
+    ];
+    return defaultPrompts;
+  };
+
+  const createDefaultFolder = () => {
+    return {
+      id: 'product',
+      name: 'Products',
+      type: 'prompt',
+    };
+  };
+  
   return (
     <div
       className={`fixed top-0 right-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 text-[14px] transition-all sm:relative sm:top-0`}

@@ -24,13 +24,23 @@ export const PromptFolders: FC<Props> = ({
   onDeletePrompt,
   onUpdatePrompt,
 }) => {
+  // Create and include the default folder if it doesn't exist
+  const defaultFolder: Folder = {
+    id: 'product',
+    name: 'Products',
+    type: 'prompt',
+  };
+  const adjustedFolders = folders.some((folder) => folder.id === defaultFolder.id)
+    ? folders
+    : [...folders, defaultFolder];
+
   return (
     <div className="flex w-full flex-col pt-2">
-      {folders.map((folder, index) => (
+      {adjustedFolders.map((folder, index) => (
         <PromptFolder
           key={index}
           searchTerm={searchTerm}
-          prompts={prompts.filter((p) => p.folderId)}
+          prompts={prompts.filter((p) => p.folderId === folder.id)}
           currentFolder={folder}
           onDeleteFolder={onDeleteFolder}
           onUpdateFolder={onUpdateFolder}
