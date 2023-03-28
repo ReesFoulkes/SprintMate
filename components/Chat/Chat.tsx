@@ -197,7 +197,7 @@ export const Chat: FC<Props> = memo(
                           <Spinner size="16px" className="mx-auto" />
                         </div>
                       ) : (
-                        'OpenAI: SprintMate'
+                        'SprintMate'
                       )}
                     </div>
 
