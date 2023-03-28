@@ -317,7 +317,7 @@ export const ChatInput: FC<Props> = ({
         </a>
         .{' '}
         {t(
-          "SprintMate is a tool for Development individuals to optimise their workflow, using the ChatGPT model.",
+          "SprintMate is a tool for Development individuals to optimise their workflow, using the ChatGPT model",
         )}
       </div>
     </div>
