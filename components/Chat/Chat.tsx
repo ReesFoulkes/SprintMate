@@ -148,6 +148,22 @@ export const Chat: FC<Props> = memo(
       };
     }, [messagesEndRef]);
 
+    const trackMessageUsage = (promptId: string) => {
+      fetch('/api/track', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          event: 'Message Sent with Prompt',
+          userId: '<user_id>', // Pass the user ID if available.
+          properties: {
+            promptId,
+          },
+        }),
+      });
+    };
+
     return (
       <div className="overflow-none relative flex-1 bg-white dark:bg-[#343541]">
         {!(apiKey || serverSideApiKeyIsSet) ? (
@@ -290,6 +306,10 @@ export const Chat: FC<Props> = memo(
               prompts={prompts}
               onSend={(message) => {
                 setCurrentMessage(message);
+                const relatedPrompt = prompts.find(prompt => message.content.startsWith(prompt.content));
+                if (relatedPrompt) {
+                trackMessageUsage(relatedPrompt.id);
+                                  }
                 onSend(message);
               }}
               onRegenerate={() => {
